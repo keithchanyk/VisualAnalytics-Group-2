@@ -114,10 +114,10 @@
                 .text(function (d) {
                     var parseTime = d3.timeFormat("%b %Y");
                     var hover_text = "Carrier: " + d.carrier_name +
-                                "\nAirport: " + d.airport_name +
-                                "\nMonth/Year: " + parseTime(d.date) +
-                                "\nTotal Delay (mins): " + d.weather_delay_min +
-                                "\nNum of Delays: " + d.weather_delay_count;
+                        "\nAirport: " + d.airport_name +
+                        "\nMonth/Year: " + parseTime(d.date) +
+                        "\nTotal Delay (mins): " + d.weather_delay_min +
+                        "\nNum of Delays: " + d.weather_delay_count;
                     return hover_text;
                 });
 
@@ -133,13 +133,15 @@
             yAxis = d3.axisLeft()
                 .scale(y);
 
+            // y-axis scale position
             var yAxisGroup = canvas.append("g")
                 .attr("class", "axis")
                 .attr("transform", "translate(" + (canvasWidth * 0.075) + ", 0)")
                 .call(yAxis);
 
+            // y-axis value position
             yAxisGroup.selectAll("text")
-                .attr("transform", "translate(-10,0)");
+                .attr("transform", "translate(-20,0)");
 
             canvas.append("g")
                 .attr("class", "axis")
@@ -149,7 +151,7 @@
             // Add y-axis title
             canvas.append("text")
                 .attr("transform", "rotate(-90)")
-                .attr("y", 20)
+                .attr("y", 10)
                 .attr("x", 0 - (canvasHeight / 2))
                 .attr("dy", "1em")
                 .style("text-anchor", "middle")
