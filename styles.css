@@ -37,6 +37,10 @@ svg text {
     border: 2px solid yellow;
 }
 
+.airline-review {
+    border: 2px solid green;
+}
+
 #chart {
     max-width: 800px;
     margin: 20px auto;
