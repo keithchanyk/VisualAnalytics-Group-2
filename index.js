@@ -35,11 +35,11 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
 
 // TABLEAU DASHBOARD FOR FLIGHT REVIEW
-var divElement = document.getElementById('viz1698841703431');
+var divElement = document.getElementById('viz1698842502636');
 var vizElement = divElement.getElementsByTagName('object')[0];
 if (divElement.offsetWidth > 800) {
-    vizElement.style.width = '1366px';
-    vizElement.style.height = '795px';
+    vizElement.style.width = '100%';
+    vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
 } else if (divElement.offsetWidth > 500) {
     vizElement.style.width = '1366px';
     vizElement.style.height = '795px';
