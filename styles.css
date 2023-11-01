@@ -1,8 +1,14 @@
 /* start styles.css */
+.app {
+    background-color: #1d1e1e;
+    /* font-family: "Fire Sans", sans-serif; */
+    border: 2px solid green;
+}
 
 h1 {
     font-family: sans-serif;
-    text-align: center;
+    color: yellow;
+    text-align: center !important;
 }
 
 svg {
@@ -25,4 +31,9 @@ svg text {
 
 .passenger-satisfaction {
     border: 2px solid red;
+}
+
+#chart {
+    max-width: 800px;
+    margin: 20px auto;
 }

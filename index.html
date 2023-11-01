@@ -25,16 +25,21 @@ Email:  kim.jongun.2020
     <!-- SCRIPT FOR D3 LIBRARY -->
     <script src="https://d3js.org/d3.v7.min.js" charset="utf-8"></script>
 
-    <!-- script for fligthDelay.js -->
-    <script src="flightDelay.js"></script>
+    <link rel="stylesheet" href="flipboard.css">
+    <script src="https://kit.fontawesome.com/dd348bbd0a.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
 
+    <!-- script for fligthDelay.js -->
+    <!-- <script src="flightDelay.js"></script> -->
     <!-- external reference styles.css -->
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> -->
 
     <title>Q4 - Party</title>
 </head>
 
 <body>
+
+    <!-- NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
@@ -66,11 +71,71 @@ Email:  kim.jongun.2020
 
         <h1 class="h1 text-center">This is the dashboard</h1>
 
+        <h1><i class="fas fa-plane-departure"></i>Departures</h1>
+        <div class="departure-board">
+            <span class="letter letter-A"></span>
+            <span class="letter letter-I"></span>
+            <span class="letter letter-R"></span>
+            <span class="letter letter-L"></span>
+            <span class="letter letter-I"></span>
+            <span class="letter letter-N"></span>
+            <span class="letter letter-E"></span>
+            <span class="letter letter-blank"></span>
+            <span class="letter letter-R"></span>
+            <span class="letter letter-E"></span>
+            <span class="letter letter-V"></span>
+            <span class="letter letter-I"></span>
+            <span class="letter letter-E"></span>
+            <span class="letter letter-W"></span>
+        </div>
+
         <!-- PASSENGER DEMOGRAPHIC DIV -->
         <div class="container-fluid passenger-demographic">
             <h2>Passenger Demographic</h2>
             <p>This is a paragraph</p>
-            <svg class="chart"></svg>
+            <div class="container">
+                <div id="chartContainer" class="row">
+
+                    <div class="col-6" id="piechartone">
+                        Age Range:
+                        <select id="ageBinDropdown_one">
+                            <option value="0-9">0-9</option>
+                            <option value="10-19">10-19</option>
+                            <option value="20-29">20-29</option>
+                            <option value="30-39">30-39</option>
+                            <option value="40-49">40-49</option>
+                            <option value="50-59">50-59</option>
+                            <option value="60-69">60-69</option>
+                            <option value="70-79">70-79</option>
+                            <option value="80+">80+</option>
+                        </select>
+
+                        <div id="chart_one"></div>
+
+                    </div>
+
+                    <div class="col-6" id="piecharttwo">
+                        Age Range:
+                        <select id="ageBinDropdown_two">
+                            <option value="0-9">0-9</option>
+                            <option value="10-19">10-19</option>
+                            <option value="20-29">20-29</option>
+                            <option value="30-39">30-39</option>
+                            <option value="40-49">40-49</option>
+                            <option value="50-59">50-59</option>
+                            <option value="60-69">60-69</option>
+                            <option value="70-79">70-79</option>
+                            <option value="80+">80+</option>
+                        </select>
+
+                        <div id="chart_two"></div>
+
+                    </div>
+
+                    <svg width="800" height="400" id="bar-chart"></svg>
+
+                </div>
+            </div>
 
         </div>
 
@@ -125,6 +190,8 @@ Email:  kim.jongun.2020
          REFERENCE TO LOCAL EXTERNAL JAVASCRIPT
      -->
     <script src="index.js"></script>
+    <script src="flightClass.js"></script>
+    <script src="classByAge.js"></script>
 
 
 
