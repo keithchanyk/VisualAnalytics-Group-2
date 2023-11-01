@@ -1,3 +1,4 @@
+// TABLEAU DASHBOARD FOR PASSENGER SATISFACTION
 var divElement = document.getElementById('viz1698669550215');
 var vizElement = divElement.getElementsByTagName('object')[0];
 if (divElement.offsetWidth > 800) {
@@ -15,6 +16,22 @@ scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
 vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
 
+// TABLEAU DASHBOARD FOR FLIGHT DELAY
+var divElement = document.getElementById('viz1698841248199');
+var vizElement = divElement.getElementsByTagName('object')[0];
+if (divElement.offsetWidth > 800) {
+   vizElement.style.width = '1200px';
+   vizElement.style.height = '827px';
+} else if (divElement.offsetWidth > 500) {
+   vizElement.style.width = '1200px';
+   vizElement.style.height = '827px';
+} else {
+   vizElement.style.width = '100%';
+   vizElement.style.height = '1527px';
+}
+var scriptElement = document.createElement('script');
+scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
 // Update CSV file path here
 var CSV_FILE_PATH = "./datasets/airline_delay_cause.csv";
