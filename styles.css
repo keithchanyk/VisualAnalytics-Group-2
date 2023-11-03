@@ -1,8 +1,9 @@
 /* start styles.css */
-.app {
+#app {
     background-color: #1d1e1e;
     /* font-family: "Fire Sans", sans-serif; */
     border: 2px solid green;
+    color: white;
 }
 
 h1 {
@@ -27,6 +28,7 @@ svg text {
 
 .passenger-demographic {
     border: 2px solid blue;
+    background-color: white;
 }
 
 .passenger-satisfaction {
@@ -34,6 +36,7 @@ svg text {
 }
 
 .airline-delay {
+    background-color: white;
     border: 2px solid yellow;
 }
 
