@@ -51,6 +51,9 @@ var scriptElement = document.createElement('script');
 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
 vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
+
+// D3 CHART FOR SCATTER PLOT
+
 // Update CSV file path here
 var CSV_FILE_PATH = "./datasets/airline_delay_cause.csv";
 
@@ -216,3 +219,20 @@ function makeWeatherBubbleChart(data) {
         .attr("dy", "0.35em")
         .text(function (d) { return "≥ " + Math.round(d); });
 }
+
+// END OF D3 CHART FOR SCATTER PLOT
+
+const app = Vue.createApp({
+    data() {
+        return {
+            currentDiv: 'divA'
+        }
+    },
+    methods: {
+        showDiv(divId) {
+            this.currentDiv = divId;
+        }
+    }
+});
+
+app.mount('#app');

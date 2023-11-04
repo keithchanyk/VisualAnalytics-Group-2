@@ -26,7 +26,12 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
         group[1].sort((a, b) => classOrder.indexOf(a[0]) - classOrder.indexOf(b[0]));
     });
 
+    // const container = d3.select('#piechartone');
+    // const containerWidth = container.node().getBoundingClientRect().width;
+    // const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
+
     // Set up the SVG dimensions and scales
+    
     var svgWidth = 800;
     var svgHeight = 400;
     var margin = { top: 20, right: 30, bottom: 60, left: 90 };

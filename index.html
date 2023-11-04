@@ -13,6 +13,11 @@ Email:  kim.jongun.2020
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- DO NOT REMOVE
+         REFERENCE TO VUE 3 JAVASCRIPT
+    -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- DO NOT REMOVE
          REFERENCE TO LOCAL BOOTSTRAP CSS
     -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -68,12 +73,8 @@ Email:  kim.jongun.2020
 
     <!-- Main App -->
     <div id="app" class="container-fluid">
-<!-- 
-        <h1 class="h1 text-center">This is the dashboard</h1>
-
-        <h1><i class="fas fa-plane-departure"></i>Departures</h1> -->
         <div class="departure-board container-fluid">
-            <span class="letter letter-A"></span>
+            <!-- <span class="letter letter-A"></span>
             <span class="letter letter-I"></span>
             <span class="letter letter-R"></span>
             <span class="letter letter-L"></span>
@@ -88,7 +89,6 @@ Email:  kim.jongun.2020
             <span class="letter letter-E"></span>
             <span class="letter letter-W"></span>
             <span class="letter letter-blank"></span>
-<!-- repeat with D A S H B O A R D -->
             <span class="letter letter-D"></span>
             <span class="letter letter-E"></span>
             <span class="letter letter-P"></span>
@@ -103,141 +103,247 @@ Email:  kim.jongun.2020
             <span class="letter letter-O"></span>
             <span class="letter letter-A"></span>
             <span class="letter letter-R"></span>
-            <span class="letter letter-D"></span>
+            <span class="letter letter-D"></span> -->
+            <!-- repeat with Revolutioning Air Travel -->
+            <span class="letter letter-R"></span>
+            <span class="letter letter-E"></span>
+            <span class="letter letter-V"></span>
+            <span class="letter letter-O"></span>
+            <span class="letter letter-L"></span>
+            <span class="letter letter-U"></span>
+            <span class="letter letter-T"></span>
+            <span class="letter letter-I"></span>
+            <span class="letter letter-O"></span>
+            <span class="letter letter-N"></span>
+            <span class="letter letter-I"></span>
+            <span class="letter letter-N"></span>
+            <span class="letter letter-G"></span>
+            <span class="letter letter-blank"></span>
+            <span class="letter letter-A"></span>
+            <span class="letter letter-I"></span>
+            <span class="letter letter-R"></span>
+            <span class="letter letter-blank"></span>
+            <span class="letter letter-T"></span>
+            <span class="letter letter-R"></span>
+            <span class="letter letter-A"></span>
+            <span class="letter letter-V"></span>
+            <span class="letter letter-E"></span>
+            <span class="letter letter-L"></span>
+
         </div>
 
-        <!-- PASSENGER DEMOGRAPHIC DIV -->
-        <div class="container-fluid passenger-demographic">
-            <h2>Passenger Demographic</h2>
-            <p>This is a paragraph</p>
-            <div class="container">
-                <div id="chartContainer" class="row">
+        <div class="container-fluid">
+            <button @click="showDiv('divA')" class="btn btn-primary">Introduction</button>
+            <button @click="showDiv('divB')" class="btn btn-primary">Motivations</button>
 
-                    <div class="col-6" id="piechartone">
-                        Age Range:
-                        <select id="ageBinDropdown_one">
-                            <option value="0-9">0-9</option>
-                            <option value="10-19">10-19</option>
-                            <option value="20-29">20-29</option>
-                            <option value="30-39">30-39</option>
-                            <option value="40-49">40-49</option>
-                            <option value="50-59">50-59</option>
-                            <option value="60-69">60-69</option>
-                            <option value="70-79">70-79</option>
-                            <option value="80+">80+</option>
-                        </select>
-
-                        <div id="chart_one"></div>
-
+            <div v-if="currentDiv === 'divA'">
+                <div class="card">
+                    <div style="display: flex; justify-content: center; align-items: center; ">
+                        <img src="./images/airport.png" class="card-img-top" alt="..." style="width: 40%;">
                     </div>
 
-                    <div class="col-6" id="piecharttwo">
-                        Age Range:
-                        <select id="ageBinDropdown_two">
-                            <option value="0-9">0-9</option>
-                            <option value="10-19">10-19</option>
-                            <option value="20-29">20-29</option>
-                            <option value="30-39">30-39</option>
-                            <option value="40-49">40-49</option>
-                            <option value="50-59">50-59</option>
-                            <option value="60-69">60-69</option>
-                            <option value="70-79">70-79</option>
-                            <option value="80+">80+</option>
-                        </select>
-
-                        <div id="chart_two"></div>
+                    <div class="card-body">
+                        <p class="card-text">Air travel has seen many transformations over the decades. From the rise of
+                            in-flight entertainment, to heightened security measures from the effects of the 11
+                            September 2001 attacks to the popularity of long-haul flights, these are some of the dynamic
+                            changes that the air travel industry faced, partly because of the changing passengers’
+                            needs. The recent COVID-19 pandemic is of no difference. It has changed the passengers’
+                            preference to flight experiences, with a much significant emphasis on health and safety. [1]
+                            This paradigm shift not only underscores the adaptability of the aviation industry but also
+                            raises questions about the future of travel in a world forever altered by the pandemic.</p>
 
                     </div>
-
-                    <svg width="800" height="400" id="bar-chart"></svg>
-
                 </div>
+            </div>
+            <div v-if="currentDiv === 'divB'">
+                <div class="card">
+                    <div style="display: flex; justify-content: center; align-items: center; ">
+                        <img src="./images/airport.png" class="card-img-top" alt="..." style="width: 40%;">
+                    </div>
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            The motivation behind this research endeavour lies in the profound impact that evolving
+                            passenger
+                            preferences have on the air travel industry and, ultimately, on the travel experiences of
+                            millions
+                            worldwide. With each passing year, the industry witnesses shift in priorities, influenced by
+                            factors
+                            ranging from technological advancements to global events like the COVID-19 pandemic.
+                            Understanding
+                            these shifts is vital for airlines, airports, and travellers alike. For airlines and
+                            airports, it
+                            means aligning their services and offerings with the evolving needs of their clientele. For
+                            travellers, it means making informed decisions that prioritize their safety, comfort, and
+                            overall
+                            satisfaction.
+
+
+                        </p>
+                        <p class="card-text">
+                            This research seeks to address this critical intersection between passenger preferences and
+                            the aviation industry's strategies. By providing a comprehensive visualization that unravels
+                            these shifts over time, we empower travellers with invaluable insights to make well-informed
+                            decisions and develop contingency plans when booking their next flight. In a world where air
+                            travel plays an increasingly integral role, this research serves as a beacon, guiding both
+                            industry stakeholders and passengers towards a more seamless and tailored travel experience.
+                        </p>
+                    </div>
+                </div>
+
             </div>
 
         </div>
+    </div>
 
-        <!-- PASSENGER SATISFACTION DIV -->
-        <div class="container-fluid passenger-satisfaction">
-            <h2>Passenger Satisfaction</h2>
 
-            <div class="container-fluid">
+    <!-- PASSENGER DEMOGRAPHIC DIV -->
+    <div class="container-fluid passenger-demographic">
+        <h2>Passenger Demographic</h2>
+        <div class="row" style="border: 2px solid red;">
+            <div class="col-6">
                 <p>This is a paragraph</p>
             </div>
 
-            <div class='tableauPlaceholder' id='viz1698669550215' style='position: relative'><noscript><a href='#'><img
-                            alt='Passenger Satisfaction '
-                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1_rss.png'
-                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' />
-                    <param name='language' value='en-US' />
-                    <param name='filter' value='publish=yes' />
-                </object></div>
+            <!-- FIRST PIE CHART -->
+            <div class="col-6 row">
+                <div class="col-6" id="piechartone" style="border: 2px solid red;">
+                    Age Range:
+                    <select id="ageBinDropdown_one">
+                        <option value="0-9">0-9</option>
+                        <option value="10-19">10-19</option>
+                        <option value="20-29">20-29</option>
+                        <option value="30-39">30-39</option>
+                        <option value="40-49">40-49</option>
+                        <option value="50-59">50-59</option>
+                        <option value="60-69">60-69</option>
+                        <option value="70-79">70-79</option>
+                        <option value="80+">80+</option>
+                    </select>
+
+                    <div id="chart_one"></div>
+
+                </div>
+
+                <!-- SECOND PIE CHART -->
+                <div class="col-6" id="piecharttwo">
+                    Age Range:
+                    <select id="ageBinDropdown_two">
+                        <option value="0-9">0-9</option>
+                        <option value="10-19">10-19</option>
+                        <option value="20-29">20-29</option>
+                        <option value="30-39">30-39</option>
+                        <option value="40-49">40-49</option>
+                        <option value="50-59">50-59</option>
+                        <option value="60-69">60-69</option>
+                        <option value="70-79">70-79</option>
+                        <option value="80+">80+</option>
+                    </select>
+                    <div id="chart_two"></div>
+                </div>
+
+            </div>
+
+            <!-- FOR BAR CHART -->
+            <div class="col-6 row">
+                <div class="col-12">
+                    <svg width="800" height="400" id="bar-chart"></svg>
+                </div>
+            </div>
         </div>
 
-        <div class="container-fluid airline-delay">
-            <h2>Airline Delay</h2>
-            <p>This is a paragraph</p>
-            <div id="chart-container"></div>
-            <div class='tableauPlaceholder' id='viz1698841248199' style='position: relative'><noscript><a href='#'><img
-                            alt='Dashboard 1 '
-                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1_rss.png'
-                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='Project_16988363476220&#47;Dashboard1' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' />
-                    <param name='language' value='en-US' />
-                </object></div>
-            <!-- <svg class="chart"></svg> -->
+    </div>
 
+    <!-- PASSENGER SATISFACTION DIV -->
+    <div class="container-fluid passenger-satisfaction">
+        <h2>Passenger Satisfaction</h2>
+
+
+        <p>This is a paragraph</p>
+
+
+
+
+
+        <div class='tableauPlaceholder' id='viz1698669550215' style='position: relative'><noscript><a href='#'><img
+                        alt='Passenger Satisfaction '
+                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1_rss.png'
+                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image'
+                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+                <param name='filter' value='publish=yes' />
+            </object>
         </div>
 
-        <div class="container-fluid airline-review">
-            <h2>Airline Review</h2>
-            <p>This is a paragraph</p>
-            <div class='tableauPlaceholder' id='viz1698842502636' style='position: relative'><noscript><a href='#'><img
-                            alt='Airline Dashboard '
-                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1_rss.png'
-                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                    <param name='embed_code_version' value='3' />
-                    <param name='site_root' value='' />
-                    <param name='name' value='Airline_review_16988422680820&#47;AirlineDashboard' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image'
-                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1.png' />
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' />
-                    <param name='language' value='en-US' />
-                </object></div>
-            
 
-        </div>
+
+    </div>
+
+    <div class="container-fluid airline-delay">
+        <h2>Airline Delay</h2>
+        <p>This is a paragraph</p>
+        <div id="chart-container"></div>
+        <div class='tableauPlaceholder' id='viz1698841248199' style='position: relative'><noscript><a href='#'><img
+                        alt='Dashboard 1 '
+                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1_rss.png'
+                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='Project_16988363476220&#47;Dashboard1' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image'
+                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object></div>
+        <!-- <svg class="chart"></svg> -->
+
+    </div>
+
+    <div class="container-fluid airline-review">
+        <h2>Airline Review</h2>
+        <p>This is a paragraph</p>
+        <div class='tableauPlaceholder' id='viz1698842502636' style='position: relative'><noscript><a href='#'><img
+                        alt='Airline Dashboard '
+                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1_rss.png'
+                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                <param name='embed_code_version' value='3' />
+                <param name='site_root' value='' />
+                <param name='name' value='Airline_review_16988422680820&#47;AirlineDashboard' />
+                <param name='tabs' value='no' />
+                <param name='toolbar' value='yes' />
+                <param name='static_image'
+                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1.png' />
+                <param name='animate_transition' value='yes' />
+                <param name='display_static_image' value='yes' />
+                <param name='display_spinner' value='yes' />
+                <param name='display_overlay' value='yes' />
+                <param name='display_count' value='yes' />
+                <param name='language' value='en-US' />
+            </object></div>
+
+
+    </div>
+
 
     </div><!-- [Main App] end-container-->
 
@@ -251,10 +357,7 @@ Email:  kim.jongun.2020
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <!-- DO NOT REMOVE
-         REFERENCE TO VUE 3 JAVASCRIPT
-    -->
-    <script src="https://unpkg.com/vue@next"></script>
+
 
     <!-- DO NOT REMOVE
          REFERENCE TO LOCAL EXTERNAL JAVASCRIPT

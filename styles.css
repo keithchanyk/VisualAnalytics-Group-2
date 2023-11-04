@@ -1,9 +1,14 @@
 /* start styles.css */
+body {
+    background-color: #BBD6EC !important;
+  }
+
 #app {
-    background-color: #1d1e1e;
-    /* font-family: "Fire Sans", sans-serif; */
-    border: 2px solid green;
-    color: white;
+    font-family: "Fire Sans", sans-serif;
+}
+
+p {
+    font-size: larger;
 }
 
 h1 {
@@ -29,19 +34,23 @@ svg text {
 .passenger-demographic {
     border: 2px solid blue;
     background-color: white;
+    color: black;
 }
 
 .passenger-satisfaction {
     border: 2px solid red;
+    color: black;
 }
 
 .airline-delay {
     background-color: white;
     border: 2px solid yellow;
+    color: black;
 }
 
 .airline-review {
     border: 2px solid green;
+    color: black;
 }
 
 #chart {
