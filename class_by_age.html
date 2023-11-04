@@ -9,31 +9,42 @@
 
 <body>
     <h1>Age vs. Class Bar Chart</h1>
-    <svg width="800" height="400" id="bar-chart"></svg>
     
+    <svg width="800" height="400" id="bar-chart"></svg>
+
 
     <script>
 
         d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (data) {
             // Create age bins
-            var ageBins = d3.range(0, 101, 10);
-            var ageLabels = ageBins.slice(0, -1).map(function (d, i) {
+            // Create age bins
+            var ageBins = [0, 10, 20, 30, 40, 50, 60, 70, 80]; // Define specific age bins
+            var ageLabels = ageBins.map(function (d, i) {
+                if (i === ageBins.length - 1) {
+                    return d + "+"; // Change the label for the last bin to "80+"
+                }
                 return d + "-" + (d + 9);
             });
+            console.log(ageLabels)
 
-
-            // Create an 'AgeBin' property based on the 'Age' values
+            // Create an 'AgeBin' property based on the new 'ageBins'
             data.forEach(function (d) {
-                // console.log(d.Class)
-                d.AgeBin = ageLabels.find(label => {
+                var ageBinLabel = ageLabels.find(label => {
                     var ageRange = label.split('-').map(Number);
                     return d.Age >= ageRange[0] && d.Age <= ageRange[1];
                 });
+
+                // Check if the label is "80+" and assign the appropriate age bin
+                if (d.Age >= 80) {
+                    d.AgeBin = "80+";
+                } else {
+                    d.AgeBin = ageBinLabel;
+                }
             });
 
             // Group the data by AgeBin and Class
             var groupedData = d3.rollups(data, v => v.length, d => d.AgeBin, d => d.Class);
-
+            console.log(groupedData)
             var classOrder = ['Business', 'Economy', 'Economy Plus'];
 
 
@@ -43,6 +54,7 @@
             });
 
             // Set up the SVG dimensions and scales
+            
             var svgWidth = 800;
             var svgHeight = 400;
             var margin = { top: 20, right: 30, bottom: 60, left: 90 };
