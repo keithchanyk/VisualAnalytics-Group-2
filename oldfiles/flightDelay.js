@@ -3,9 +3,14 @@
 // Update CSV file path here
 var CSV_FILE_PATH = "./datasets/airline_delay_cause.csv";
 
-// Set the dimensions of the chart
-var canvasWidth = 1000;
-var canvasHeight = 500;
+// Select the container (div) and its dimensions
+const container = d3.select('.chart'); // Replace '.chart' with the selector for your div
+const containerWidth = container.node().getBoundingClientRect().width;
+const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
+
+// Set the dimensions of the chart based on the container's size
+var canvasWidth = containerWidth;
+var canvasHeight = containerHeight;
 
 // scales
 var x, y, size;
@@ -66,9 +71,9 @@ function makeWeatherBubbleChart(data) {
         .domain([0, d3.max(data, function (d) { return d.weather_delay_count; })])
         .interpolator(d3.interpolateBlues);
 
-    var canvas = d3.select(".chart")
-        .style("width", canvasWidth)
-        .style("height", canvasHeight);
+    var canvas = d3.select('.chart')
+        .style("width", canvasWidth + "px")
+        .style("height", canvasHeight + "px");
 
     var circle = d3.select(".chart").selectAll("circle")
         .data(data);
