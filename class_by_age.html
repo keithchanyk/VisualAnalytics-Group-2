@@ -106,7 +106,7 @@
                 .attr("height", d => height - y(d[1]))
                 .attr("fill", d => color(d[0]))
                 .append("title") // Add a title element
-                .text(d => `Class: ${d[0]}\nPassengers: ${d[1]}`);;
+                .text(d => `Class: ${d[0]}\nPassengers: ${d[1]}`);
 
             // X-axis
             svg.append("g")

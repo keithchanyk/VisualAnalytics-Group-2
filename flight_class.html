@@ -145,7 +145,7 @@
                 const container = d3.select('#piechartone');
                 const containerWidth = container.node().getBoundingClientRect().width;
                 const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
-
+                const fontSize = containerWidth / 40;
 
                 // Create the SVG element
                 const svg = d3.select('#chart_one')
@@ -202,6 +202,7 @@
                     .attr('transform', (d) => `translate(${arc.centroid(d)})`)
                     .attr('dy', '.35em')
                     .style('text-anchor', 'middle')
+                    .style("font-size", fontSize + "px")
                     .text((d) => {
                         if (displayAsPercentage) {
                             return ((d.data.count / total) * 100).toFixed(2) + '%'; // Display as percentage
@@ -242,7 +243,7 @@
                     .enter()
                     .append('g')
                     .attr('class', 'legend-item')
-                    .attr('transform', (d, i) => `translate(${i * 100}, 0)`); // Adjust the spacing as needed
+                    .attr('transform', (d, i) => `translate(${i * fontSize * 7}, 0)`); // Adjust the spacing as needed
 
                 // Add colored squares to represent classes
                 legendItems
@@ -256,7 +257,8 @@
                     .append('text')
                     .attr('x', 15) // Adjust the x-coordinate for text
                     .attr('y', 10) // Adjust the y-coordinate for text
-                    .text(d => d.type);
+                    .text(d => d.type)
+                    .style("font-size", fontSize + "px");
 
             });
         }
@@ -307,6 +309,8 @@
                 const container = d3.select('#piecharttwo');
                 const containerWidth = container.node().getBoundingClientRect().width;
                 const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
+                const fontSize = containerWidth / 40;
+
 
 
                 // Create the SVG element
@@ -365,6 +369,7 @@
                     .attr('transform', (d) => `translate(${arc.centroid(d)})`)
                     .attr('dy', '.35em')
                     .style('text-anchor', 'middle')
+                    .style("font-size", fontSize + "px")
                     .text((d) => {
                         if (displayAsPercentage) {
                             return ((d.data.count / total) * 100).toFixed(2) + '%'; // Display as percentage
@@ -406,7 +411,7 @@
                     .enter()
                     .append('g')
                     .attr('class', 'legend-item')
-                    .attr('transform', (d, i) => `translate(${i * 100}, 0)`); // Adjust the spacing as needed
+                    .attr('transform', (d, i) => `translate(${i * fontSize * 7}, 0)`); // Adjust the spacing as needed
 
                 // Add colored squares to represent classes
                 legendItems
@@ -420,7 +425,8 @@
                     .append('text')
                     .attr('x', 15) // Adjust the x-coordinate for text
                     .attr('y', 10) // Adjust the y-coordinate for text
-                    .text(d => d.type);
+                    .text(d => d.type)
+                    .style("font-size", fontSize + "px");
             });
 
 
