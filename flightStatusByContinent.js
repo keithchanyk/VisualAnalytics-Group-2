@@ -34,7 +34,7 @@
     
     
                 var margin = { top: 50, right: 50, bottom: 50, left: 50 },
-                    width = 500 - margin.left - margin.right,
+                    width = 600 - margin.left - margin.right,
                     height = 500 - margin.top - margin.bottom;
     
                 // append the svg object to the body of the page
@@ -45,7 +45,7 @@
                     .append("g")
                     .attr("transform",
                         "translate(" + (width / 2 + 50) + "," + (height / 2 + 50) + ")");
-    
+
                 // Create scales
                 var innerRadius = 50;
                 var outerRadius = Math.min(width, height) / 1.9 - 7;  // Adjust this value to make the plot bigger
@@ -111,7 +111,7 @@
     
                 // Add legend title
                 svg.append("text")
-                    .attr("x",-190)
+                    .attr("x",-220)
                     .attr("y", -height / 2 + 350)
                     .attr("dy", ".35em")
                     .style("text-anchor", "middle")
