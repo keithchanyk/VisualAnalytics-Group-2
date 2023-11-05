@@ -15,6 +15,9 @@
         <h1>Flight Class Distribution</h1><br><br>
 
         <div id="chartContainer" class="row">
+            <div>
+                <button class='btn btn-primary' id="toggleDisplayButton">Display Percentage</button>
+            </div>
 
             <div class="col-6" id="piechartone">
                 Age Range:
@@ -61,6 +64,26 @@
 
         var ageBinDropdown_one = document.getElementById("ageBinDropdown_one");
         var ageBinDropdown_two = document.getElementById("ageBinDropdown_two");
+
+        const toggleDisplayButton = document.getElementById('toggleDisplayButton');
+        toggleDisplayButton.addEventListener('click', toggleDisplay);
+
+        let displayAsPercentage = false;
+
+        function toggleDisplay() {
+            displayAsPercentage = !displayAsPercentage;
+            if (displayAsPercentage){
+                toggleDisplayButton.innerText = 'Display Number'
+            }else{
+                toggleDisplayButton.innerText = 'Display Percentage'
+            }
+            updatePieChartOne(ageBinDropdown_one.value); // Update pie chart one
+            updatePieChartTwo(ageBinDropdown_two.value); // Update pie chart two
+        }
+
+        const classColorScale = d3.scaleOrdinal()
+            .domain(['Business', 'Economy', 'Economy Plus'])
+            .range(['#1f77b4', '#ff7f0e', '#2ca02c']);
 
 
         ageBinDropdown_one.addEventListener("change", function () {
@@ -110,6 +133,11 @@
                 const typeCounts = d3.rollup(data, v => v.length, d => d['Class']);
                 const typeData = Array.from(typeCounts, ([type, count]) => ({ type, count }));
 
+                typeData.sort((a, b) => {
+                    const order = ['Business', 'Economy', 'Economy Plus'];
+                    return order.indexOf(a.type) - order.indexOf(b.type);
+                });
+
 
                 console.log(typeData)
 
@@ -151,7 +179,7 @@
                     .data(arcs)
                     .enter()
                     .append('path')
-                    .attr('fill', d => colorScale(d.data.type))
+                    .attr('fill', d => classColorScale(d.data.type))
                     .attr('d', arc)
                     .transition()
                     .duration(1000)
@@ -162,21 +190,36 @@
                         };
                     });
 
-                // Add numbers
-                svgEnter.selectAll('text')
+                // Calculate the total count for the selected age bin
+                const total = d3.sum(typeData, (d) => d.count);
+
+                // Add numbers or percentages
+                svgEnter
+                    .selectAll('text')
                     .data(arcs)
                     .enter()
                     .append('text')
-                    .attr('transform', d => `translate(${arc.centroid(d)})`)
+                    .attr('transform', (d) => `translate(${arc.centroid(d)})`)
                     .attr('dy', '.35em')
                     .style('text-anchor', 'middle')
-                    .text(d => 0) // Start with 0 and transition to the actual count
+                    .text((d) => {
+                        if (displayAsPercentage) {
+                            return ((d.data.count / total) * 100).toFixed(2) + '%'; // Display as percentage
+                        } else {
+                            return d.data.count; // Display as count
+                        }
+                    })
                     .transition()
-                    .duration(1000) // Duration of the text transition
-                    .tween("text", function (d) {
-                        var i = d3.interpolate(0, d.data.count);
+                    .duration(1000)
+                    .tween('text', function (d) {
+                        let i;
+                        if (displayAsPercentage) {
+                            i = d3.interpolate(0, (d.data.count / total) * 100);
+                        } else {
+                            i = d3.interpolate(0, d.data.count);
+                        }
                         return function (t) {
-                            this.textContent = Math.round(i(t));
+                            this.textContent = displayAsPercentage ? ((i(t)).toFixed(2) + '%') : Math.round(i(t));
                         };
                     });
 
@@ -187,10 +230,10 @@
                     .attr('class', 'legend-container')
                     .attr('transform', `translate(-${containerWidth / 2}, ${containerHeight / 2 - 30})`); // Adjust the y-coordinate as needed
 
-                // Define color scale for the legend
-                const legendColorScale = d3.scaleOrdinal()
-                    .domain(typeData.map(d => d.type))
-                    .range(d3.schemeCategory10);
+                // // Define color scale for the legend
+                // const legendColorScale = d3.scaleOrdinal()
+                //     .domain(typeData.map(d => d.type))
+                //     .range(d3.schemeCategory10);
 
                 // Create legend items
                 const legendItems = legendContainer
@@ -206,7 +249,7 @@
                     .append('rect')
                     .attr('width', 10) // Adjust the width as needed
                     .attr('height', 10) // Adjust the height as needed
-                    .attr('fill', d => legendColorScale(d.type));
+                    .attr('fill', d => classColorScale(d.type));
 
                 // Add text labels for classes
                 legendItems
@@ -253,6 +296,10 @@
                 const typeCounts = d3.rollup(data, v => v.length, d => d['Class']);
                 const typeData = Array.from(typeCounts, ([type, count]) => ({ type, count }));
 
+                typeData.sort((a, b) => {
+                    const order = ['Business', 'Economy', 'Economy Plus'];
+                    return order.indexOf(a.type) - order.indexOf(b.type);
+                });
 
                 console.log(typeData)
 
@@ -294,7 +341,7 @@
                     .data(arcs)
                     .enter()
                     .append('path')
-                    .attr('fill', d => colorScale(d.data.type))
+                    .attr('fill', d => classColorScale(d.data.type))
                     .attr('d', arc)
                     .transition()
                     .duration(1000)
@@ -305,21 +352,37 @@
                         };
                     });
 
-                // Add numbers
-                svgEnter.selectAll('text')
+
+                // Calculate the total count for the selected age bin
+                const total = d3.sum(typeData, (d) => d.count);
+
+                // Add numbers or percentages
+                svgEnter
+                    .selectAll('text')
                     .data(arcs)
                     .enter()
                     .append('text')
-                    .attr('transform', d => `translate(${arc.centroid(d)})`)
+                    .attr('transform', (d) => `translate(${arc.centroid(d)})`)
                     .attr('dy', '.35em')
                     .style('text-anchor', 'middle')
-                    .text(d => 0) // Start with 0 and transition to the actual count
+                    .text((d) => {
+                        if (displayAsPercentage) {
+                            return ((d.data.count / total) * 100).toFixed(2) + '%'; // Display as percentage
+                        } else {
+                            return d.data.count; // Display as count
+                        }
+                    })
                     .transition()
-                    .duration(1000) // Duration of the text transition
-                    .tween("text", function (d) {
-                        var i = d3.interpolate(0, d.data.count);
+                    .duration(1000)
+                    .tween('text', function (d) {
+                        let i;
+                        if (displayAsPercentage) {
+                            i = d3.interpolate(0, (d.data.count / total) * 100);
+                        } else {
+                            i = d3.interpolate(0, d.data.count);
+                        }
                         return function (t) {
-                            this.textContent = Math.round(i(t));
+                            this.textContent = displayAsPercentage ? ((i(t)).toFixed(2) + '%') : Math.round(i(t));
                         };
                     });
 
@@ -330,10 +393,11 @@
                     .attr('class', 'legend-container')
                     .attr('transform', `translate(-${containerWidth / 2}, ${containerHeight / 2 - 30})`); // Adjust the y-coordinate as needed
 
-                // Define color scale for the legend
-                const legendColorScale = d3.scaleOrdinal()
-                    .domain(typeData.map(d => d.type))
-                    .range(d3.schemeCategory10);
+
+                // // Define color scale for the legend
+                // const legendColorScale = d3.scaleOrdinal()
+                //     .domain(typeData.map(d => d.type))
+                //     .range(d3.schemeCategory10);
 
                 // Create legend items
                 const legendItems = legendContainer
@@ -349,7 +413,7 @@
                     .append('rect')
                     .attr('width', 10) // Adjust the width as needed
                     .attr('height', 10) // Adjust the height as needed
-                    .attr('fill', d => legendColorScale(d.type));
+                    .attr('fill', d => classColorScale(d.type));
 
                 // Add text labels for classes
                 legendItems
