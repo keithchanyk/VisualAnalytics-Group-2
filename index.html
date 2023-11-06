@@ -86,6 +86,8 @@ Email:  kim.jongun.2020
             <span class="letter letter-O"></span>
             <span class="letter letter-N"></span>
             <span class="letter letter-I"></span>
+            <span class="letter letter-Z"></span>
+            <span class="letter letter-I"></span>
             <span class="letter letter-N"></span>
             <span class="letter letter-G"></span>
             <span class="letter letter-blank"></span>
@@ -101,11 +103,17 @@ Email:  kim.jongun.2020
             <span class="letter letter-L"></span>
         </div>
         <div class="container mt-3 p-0">
-            <button @click="showDiv('divA')" class="btn btn-primary">Introduction</button>
-            <button @click="showDiv('divB')" class="btn btn-primary">Motivations</button>
-
+            <div class="row mb-2">
+                <div class="col-6">
+                    <button @click="showDiv('divA')" class="btn btn-secondary w-100 pt-2 pb-2">Introduction</button>
+                </div>
+                <div class="col-6">
+                    <button @click="showDiv('divB')" class="btn btn-secondary w-100 pt-2 pb-2">Motivations</button>
+                </div>
+            </div>
             <div v-if="currentDiv === 'divA'">
                 <div class="card">
+                     <h2 class="card-title text-center">Introduction</h2>
                     <div style="display: flex; justify-content: center; align-items: center; ">
                         <img src="./images/airport.png" class="card-img-top" alt="..." style="width: 40%;">
                     </div>
@@ -123,8 +131,9 @@ Email:  kim.jongun.2020
             </div>
             <div v-if="currentDiv === 'divB'">
                 <div class="card">
+                    <h2 class="card-title text-center">Motivation</h2>
                     <div style="display: flex; justify-content: center; align-items: center; ">
-                        <img src="./images/airport.png" class="card-img-top" alt="..." style="width: 40%;">
+                        <img src="./images/airport-motivation.gif" class="card-img-top" alt="..." style="width: 60%;">
                     </div>
 
                     <div class="card-body">
