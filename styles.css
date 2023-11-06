@@ -38,18 +38,18 @@ svg text {
 }
 
 .passenger-satisfaction {
-    border: 2px solid red;
+    /* border: 2px solid red; */
     color: black;
 }
 
 .airline-delay {
     background-color: white;
-    border: 2px solid yellow;
+    /* border: 2px solid yellow; */
     color: black;
 }
 
 .airline-review {
-    border: 2px solid green;
+    /* border: 2px solid green; */
     color: black;
 }
 
