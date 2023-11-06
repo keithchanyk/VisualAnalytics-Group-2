@@ -1,23 +1,33 @@
 d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (data) {
     // Create age bins
-    var ageBins = d3.range(0, 101, 10);
-    var ageLabels = ageBins.slice(0, -1).map(function (d, i) {
+    // Create age bins
+    var ageBins = [0, 10, 20, 30, 40, 50, 60, 70, 80]; // Define specific age bins
+    var ageLabels = ageBins.map(function (d, i) {
+        if (i === ageBins.length - 1) {
+            return d + "+"; // Change the label for the last bin to "80+"
+        }
         return d + "-" + (d + 9);
     });
+    console.log(ageLabels)
 
-
-    // Create an 'AgeBin' property based on the 'Age' values
+    // Create an 'AgeBin' property based on the new 'ageBins'
     data.forEach(function (d) {
-        // console.log(d.Class)
-        d.AgeBin = ageLabels.find(label => {
+        var ageBinLabel = ageLabels.find(label => {
             var ageRange = label.split('-').map(Number);
             return d.Age >= ageRange[0] && d.Age <= ageRange[1];
         });
+
+        // Check if the label is "80+" and assign the appropriate age bin
+        if (d.Age >= 80) {
+            d.AgeBin = "80+";
+        } else {
+            d.AgeBin = ageBinLabel;
+        }
     });
 
     // Group the data by AgeBin and Class
     var groupedData = d3.rollups(data, v => v.length, d => d.AgeBin, d => d.Class);
-
+    console.log(groupedData)
     var classOrder = ['Business', 'Economy', 'Economy Plus'];
 
 
@@ -25,18 +35,15 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
     groupedData.forEach(function (group) {
         group[1].sort((a, b) => classOrder.indexOf(a[0]) - classOrder.indexOf(b[0]));
     });
-
-    // const container = d3.select('#piechartone');
-    // const containerWidth = container.node().getBoundingClientRect().width;
-    // const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
-
-    // Set up the SVG dimensions and scales
     
-    var svgWidth = 800;
-    var svgHeight = 400;
+    var chartContainer = document.querySelector('.chart-container');
+    var containerWidth = chartContainer.clientWidth; // Get the width of the container
+    var containerHeight = containerWidth * 0.65; // Maintain a 4:3 aspect ratio
+
     var margin = { top: 20, right: 30, bottom: 60, left: 90 };
-    var width = svgWidth - margin.left - margin.right;
-    var height = svgHeight - margin.top - margin.bottom;
+    var width = containerWidth - margin.left - margin.right;
+    var height = containerHeight - margin.top - margin.bottom;
+    const fontSize = containerWidth / 70;
 
     var x = d3.scaleBand()
         .domain(ageLabels)
@@ -51,6 +58,9 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
         .range([height, 0]);
 
     var svg = d3.select("#bar-chart")
+        .attr('width', containerWidth) // Set the width dynamically
+        .attr('height', containerHeight) // Set the height dynamically
+        .attr('viewBox', `0 0 ${containerWidth} ${containerHeight}`)
         .append("g")
         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
@@ -60,7 +70,6 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
         .domain(classes)
         .range(["#1f77b4", "#ff7f0e", "#2ca02c"]);
 
-    console.log(groupedData)
     svg.selectAll("g")
         .data(groupedData)
         .enter().append("g")
@@ -74,22 +83,25 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
         .attr("height", d => height - y(d[1]))
         .attr("fill", d => color(d[0]))
         .append("title") // Add a title element
-        .text(d => `Class: ${d[0]}\nPassengers: ${d[1]}`);;
+        .text(d => `Class: ${d[0]}\nPassengers: ${d[1]}`);
 
     // X-axis
     svg.append("g")
         .attr("transform", "translate(0," + height + ")")
-        .call(d3.axisBottom(x));
+        .call(d3.axisBottom(x))
+        .style("font-size", fontSize + "px");
 
     // Y-axis
     svg.append("g")
-        .call(d3.axisLeft(y));
+        .call(d3.axisLeft(y))
+        .style("font-size", fontSize + "px");
 
     // X-axis label
     svg.append("text")
         .attr("x", width / 2)
         .attr("y", height + margin.top + 20)
         .style("text-anchor", "middle")
+        .style("font-size", fontSize + "px")
         .text("Age Bins");
 
     // Y-axis label
@@ -99,6 +111,7 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
         .attr("y", -margin.left)
         .attr("dy", "1em")
         .style("text-anchor", "middle")
+        .style("font-size", fontSize + "px")
         .text("Number of Passengers");
 
 
@@ -111,18 +124,20 @@ d3.csv("datasets/airline-passenger-satisfaction_cleansed.csv").then(function (da
             return "translate(0," + i * 20 + ")";
         });
 
+    
     legend.append("rect")
-        .attr("x", svgWidth - 18)
+        .attr("x", containerWidth - 30)
         .attr("y", 9)
         .attr("width", 18)
         .attr("height", 18)
         .style("fill", color);
 
     legend.append("text")
-        .attr("x", svgWidth - 28)
+        .attr("x", containerWidth - 45)
         .attr("y", 18)
         .attr("dy", ".35em")
         .style("text-anchor", "end")
+        .style("font-size", fontSize + "px")
         .text(function (d) {
             return d.charAt(0).toUpperCase() + d.slice(1);
         });

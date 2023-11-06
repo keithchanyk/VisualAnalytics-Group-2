@@ -1,6 +1,26 @@
 var ageBinDropdown_one = document.getElementById("ageBinDropdown_one");
 var ageBinDropdown_two = document.getElementById("ageBinDropdown_two");
 
+const toggleDisplayButton = document.getElementById('toggleDisplayButton');
+toggleDisplayButton.addEventListener('click', toggleDisplay);
+
+let displayAsPercentage = false;
+
+function toggleDisplay() {
+    displayAsPercentage = !displayAsPercentage;
+    if (displayAsPercentage) {
+        toggleDisplayButton.innerText = 'Display Number'
+    } else {
+        toggleDisplayButton.innerText = 'Display Percentage'
+    }
+    updatePieChartOne(ageBinDropdown_one.value); // Update pie chart one
+    updatePieChartTwo(ageBinDropdown_two.value); // Update pie chart two
+}
+
+const classColorScale = d3.scaleOrdinal()
+    .domain(['Business', 'Economy', 'Economy Plus'])
+    .range(['#1f77b4', '#ff7f0e', '#2ca02c']);
+
 
 ageBinDropdown_one.addEventListener("change", function () {
     let selectedAgeBin = ageBinDropdown_one.value;
@@ -49,6 +69,11 @@ function updatePieChartOne(ageBin) {
         const typeCounts = d3.rollup(data, v => v.length, d => d['Class']);
         const typeData = Array.from(typeCounts, ([type, count]) => ({ type, count }));
 
+        typeData.sort((a, b) => {
+            const order = ['Business', 'Economy', 'Economy Plus'];
+            return order.indexOf(a.type) - order.indexOf(b.type);
+        });
+
 
         console.log(typeData)
 
@@ -56,7 +81,7 @@ function updatePieChartOne(ageBin) {
         const container = d3.select('#piechartone');
         const containerWidth = container.node().getBoundingClientRect().width;
         const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
-
+        const fontSize = containerWidth / 40;
 
         // Create the SVG element
         const svg = d3.select('#chart_one')
@@ -90,7 +115,7 @@ function updatePieChartOne(ageBin) {
             .data(arcs)
             .enter()
             .append('path')
-            .attr('fill', d => colorScale(d.data.type))
+            .attr('fill', d => classColorScale(d.data.type))
             .attr('d', arc)
             .transition()
             .duration(1000)
@@ -101,21 +126,37 @@ function updatePieChartOne(ageBin) {
                 };
             });
 
-        // Add numbers
-        svgEnter.selectAll('text')
+        // Calculate the total count for the selected age bin
+        const total = d3.sum(typeData, (d) => d.count);
+
+        // Add numbers or percentages
+        svgEnter
+            .selectAll('text')
             .data(arcs)
             .enter()
             .append('text')
-            .attr('transform', d => `translate(${arc.centroid(d)})`)
+            .attr('transform', (d) => `translate(${arc.centroid(d)})`)
             .attr('dy', '.35em')
             .style('text-anchor', 'middle')
-            .text(d => 0) // Start with 0 and transition to the actual count
+            .style("font-size", fontSize + "px")
+            .text((d) => {
+                if (displayAsPercentage) {
+                    return ((d.data.count / total) * 100).toFixed(2) + '%'; // Display as percentage
+                } else {
+                    return d.data.count; // Display as count
+                }
+            })
             .transition()
-            .duration(1000) // Duration of the text transition
-            .tween("text", function (d) {
-                var i = d3.interpolate(0, d.data.count);
+            .duration(1000)
+            .tween('text', function (d) {
+                let i;
+                if (displayAsPercentage) {
+                    i = d3.interpolate(0, (d.data.count / total) * 100);
+                } else {
+                    i = d3.interpolate(0, d.data.count);
+                }
                 return function (t) {
-                    this.textContent = Math.round(i(t));
+                    this.textContent = displayAsPercentage ? ((i(t)).toFixed(2) + '%') : Math.round(i(t));
                 };
             });
 
@@ -126,10 +167,10 @@ function updatePieChartOne(ageBin) {
             .attr('class', 'legend-container')
             .attr('transform', `translate(-${containerWidth / 2}, ${containerHeight / 2 - 30})`); // Adjust the y-coordinate as needed
 
-        // Define color scale for the legend
-        const legendColorScale = d3.scaleOrdinal()
-            .domain(typeData.map(d => d.type))
-            .range(d3.schemeCategory10);
+        // // Define color scale for the legend
+        // const legendColorScale = d3.scaleOrdinal()
+        //     .domain(typeData.map(d => d.type))
+        //     .range(d3.schemeCategory10);
 
         // Create legend items
         const legendItems = legendContainer
@@ -138,21 +179,22 @@ function updatePieChartOne(ageBin) {
             .enter()
             .append('g')
             .attr('class', 'legend-item')
-            .attr('transform', (d, i) => `translate(${i * 100}, 0)`); // Adjust the spacing as needed
+            .attr('transform', (d, i) => `translate(${i * fontSize * 7}, 0)`); // Adjust the spacing as needed
 
         // Add colored squares to represent classes
         legendItems
             .append('rect')
             .attr('width', 10) // Adjust the width as needed
             .attr('height', 10) // Adjust the height as needed
-            .attr('fill', d => legendColorScale(d.type));
+            .attr('fill', d => classColorScale(d.type));
 
         // Add text labels for classes
         legendItems
             .append('text')
             .attr('x', 15) // Adjust the x-coordinate for text
             .attr('y', 10) // Adjust the y-coordinate for text
-            .text(d => d.type);
+            .text(d => d.type)
+            .style("font-size", fontSize + "px");
 
     });
 }
@@ -192,6 +234,10 @@ function updatePieChartTwo(ageBin) {
         const typeCounts = d3.rollup(data, v => v.length, d => d['Class']);
         const typeData = Array.from(typeCounts, ([type, count]) => ({ type, count }));
 
+        typeData.sort((a, b) => {
+            const order = ['Business', 'Economy', 'Economy Plus'];
+            return order.indexOf(a.type) - order.indexOf(b.type);
+        });
 
         console.log(typeData)
 
@@ -199,6 +245,8 @@ function updatePieChartTwo(ageBin) {
         const container = d3.select('#piecharttwo');
         const containerWidth = container.node().getBoundingClientRect().width;
         const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
+        const fontSize = containerWidth / 40;
+
 
 
         // Create the SVG element
@@ -233,7 +281,7 @@ function updatePieChartTwo(ageBin) {
             .data(arcs)
             .enter()
             .append('path')
-            .attr('fill', d => colorScale(d.data.type))
+            .attr('fill', d => classColorScale(d.data.type))
             .attr('d', arc)
             .transition()
             .duration(1000)
@@ -244,21 +292,38 @@ function updatePieChartTwo(ageBin) {
                 };
             });
 
-        // Add numbers
-        svgEnter.selectAll('text')
+
+        // Calculate the total count for the selected age bin
+        const total = d3.sum(typeData, (d) => d.count);
+
+        // Add numbers or percentages
+        svgEnter
+            .selectAll('text')
             .data(arcs)
             .enter()
             .append('text')
-            .attr('transform', d => `translate(${arc.centroid(d)})`)
+            .attr('transform', (d) => `translate(${arc.centroid(d)})`)
             .attr('dy', '.35em')
             .style('text-anchor', 'middle')
-            .text(d => 0) // Start with 0 and transition to the actual count
+            .style("font-size", fontSize + "px")
+            .text((d) => {
+                if (displayAsPercentage) {
+                    return ((d.data.count / total) * 100).toFixed(2) + '%'; // Display as percentage
+                } else {
+                    return d.data.count; // Display as count
+                }
+            })
             .transition()
-            .duration(1000) // Duration of the text transition
-            .tween("text", function (d) {
-                var i = d3.interpolate(0, d.data.count);
+            .duration(1000)
+            .tween('text', function (d) {
+                let i;
+                if (displayAsPercentage) {
+                    i = d3.interpolate(0, (d.data.count / total) * 100);
+                } else {
+                    i = d3.interpolate(0, d.data.count);
+                }
                 return function (t) {
-                    this.textContent = Math.round(i(t));
+                    this.textContent = displayAsPercentage ? ((i(t)).toFixed(2) + '%') : Math.round(i(t));
                 };
             });
 
@@ -269,10 +334,11 @@ function updatePieChartTwo(ageBin) {
             .attr('class', 'legend-container')
             .attr('transform', `translate(-${containerWidth / 2}, ${containerHeight / 2 - 30})`); // Adjust the y-coordinate as needed
 
-        // Define color scale for the legend
-        const legendColorScale = d3.scaleOrdinal()
-            .domain(typeData.map(d => d.type))
-            .range(d3.schemeCategory10);
+
+        // // Define color scale for the legend
+        // const legendColorScale = d3.scaleOrdinal()
+        //     .domain(typeData.map(d => d.type))
+        //     .range(d3.schemeCategory10);
 
         // Create legend items
         const legendItems = legendContainer
@@ -281,27 +347,24 @@ function updatePieChartTwo(ageBin) {
             .enter()
             .append('g')
             .attr('class', 'legend-item')
-            .attr('transform', (d, i) => `translate(${i * 100}, 0)`); // Adjust the spacing as needed
+            .attr('transform', (d, i) => `translate(${i * fontSize * 7}, 0)`); // Adjust the spacing as needed
 
         // Add colored squares to represent classes
         legendItems
             .append('rect')
             .attr('width', 10) // Adjust the width as needed
             .attr('height', 10) // Adjust the height as needed
-            .attr('fill', d => legendColorScale(d.type));
+            .attr('fill', d => classColorScale(d.type));
 
         // Add text labels for classes
         legendItems
             .append('text')
             .attr('x', 15) // Adjust the x-coordinate for text
             .attr('y', 10) // Adjust the y-coordinate for text
-            .text(d => d.type);
+            .text(d => d.type)
+            .style("font-size", fontSize + "px");
     });
-
-
-
 }
 
-// default render 0-9
 updatePieChartOne("0-9")
-updatePieChartTwo("0-9")
+updatePieChartTwo("10-19")
