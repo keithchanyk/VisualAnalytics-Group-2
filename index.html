@@ -102,7 +102,7 @@ Email:  kim.jongun.2020
 
         </div>
 
-        <div class="container mt-3">
+        <div class="container mt-3 p-0">
             <button @click="showDiv('divA')" class="btn btn-primary">Introduction</button>
             <button @click="showDiv('divB')" class="btn btn-primary">Motivations</button>
 
@@ -164,76 +164,139 @@ Email:  kim.jongun.2020
             </div>
 
         </div>
-    </div>
+        <!-- </div> -->
 
 
-    <!-- PASSENGER DEMOGRAPHIC DIV -->
-    <div class="container card passenger-demographic p-3 mt-3">
-        <h3>Passenger Demographic</h3>
-        <br>
-        <h6 class="mb-2 bg-warning text-center p-1">Analysing Flight Class by Age </h6>
-        <br>
-        <div class="row">
-            <!-- <div class="col-6">
+        <!-- PASSENGER DEMOGRAPHIC DIV -->
+        <div class="container card passenger-demographic p-3 mt-3">
+            <h3>Passenger Demographic</h3>
+            <br>
+            <h6 class="mb-2 bg-warning text-center p-1">Analysing Flight Class by Age </h6>
+            <br>
+            <div class="row">
+                <!-- <div class="col-6">
                 <p>This is a paragraph</p>
             </div> -->
 
-            <!-- FOR BAR CHART -->
-            <div class="row p-2">
-                <div class="col-5 chart-container">
-                    <svg id="bar-chart"></svg>
-                </div>
-                <div class="col-1"></div>
-                <div class="col-6 row">
-                    <div class="col-6" id="piechartone">
+                <!-- FOR BAR CHART -->
+                <div class="row p-2">
+                    <div class="col-5 chart-container">
+                        <svg id="bar-chart"></svg>
+                    </div>
+                    <div class="col-1"></div>
+                    <div class="col-6 row">
+                        <div class="col-6" id="piechartone">
 
-                        <div class="row d-flex justify-content-center">
-                            Age Range:
-                            <select class="form-select" id="ageBinDropdown_one">
-                                <option selected value="0-9">0-9</option>
-                                <option value="10-19">10-19</option>
-                                <option value="20-29">20-29</option>
-                                <option value="30-39">30-39</option>
-                                <option value="40-49">40-49</option>
-                                <option value="50-59">50-59</option>
-                                <option value="60-69">60-69</option>
-                                <option value="70-79">70-79</option>
-                                <option value="80+">80+</option>
-                            </select>
+                            <div class="row d-flex justify-content-center">
+                                Age Range:
+                                <select class="form-select" id="ageBinDropdown_one">
+                                    <option selected value="0-9">0-9</option>
+                                    <option value="10-19">10-19</option>
+                                    <option value="20-29">20-29</option>
+                                    <option value="30-39">30-39</option>
+                                    <option value="40-49">40-49</option>
+                                    <option value="50-59">50-59</option>
+                                    <option value="60-69">60-69</option>
+                                    <option value="70-79">70-79</option>
+                                    <option value="80+">80+</option>
+                                </select>
+                            </div>
+
+                            <div id="chart_one"></div>
+
                         </div>
 
-                        <div id="chart_one"></div>
-
-                    </div>
-
-                    <!-- SECOND PIE CHART -->
-                    <div class="col-6" id="piecharttwo">
-                        <div class="row d-flex justify-content-center">
-                            Age Range:
-                            <select class="form-select" id="ageBinDropdown_two">
-                                <option value="0-9">0-9</option>
-                                <option selected value="10-19">10-19</option>
-                                <option value="20-29">20-29</option>
-                                <option value="30-39">30-39</option>
-                                <option value="40-49">40-49</option>
-                                <option value="50-59">50-59</option>
-                                <option value="60-69">60-69</option>
-                                <option value="70-79">70-79</option>
-                                <option value="80+">80+</option>
-                            </select>
+                        <!-- SECOND PIE CHART -->
+                        <div class="col-6" id="piecharttwo">
+                            <div class="row d-flex justify-content-center">
+                                Age Range:
+                                <select class="form-select" id="ageBinDropdown_two">
+                                    <option value="0-9">0-9</option>
+                                    <option selected value="10-19">10-19</option>
+                                    <option value="20-29">20-29</option>
+                                    <option value="30-39">30-39</option>
+                                    <option value="40-49">40-49</option>
+                                    <option value="50-59">50-59</option>
+                                    <option value="60-69">60-69</option>
+                                    <option value="70-79">70-79</option>
+                                    <option value="80+">80+</option>
+                                </select>
+                            </div>
+                            <div id="chart_two"></div>
                         </div>
-                        <div id="chart_two"></div>
-                    </div>
-                    <div class="row"></div>
-                    <div class="d-flex justify-content-center">
-                        <button class='btn btn-primary btn-sm' id="toggleDisplayButton">Display Percentage</button>
+                        <div class="row"></div>
+                        <div class="d-flex justify-content-center">
+                            <button class='btn btn-primary btn-sm' id="toggleDisplayButton">Display Percentage</button>
+                        </div>
                     </div>
                 </div>
+
+                <!-- For Analysis Text-->
+                <div class="row">
+                    <h4>Analysis</h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore
+                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi
+                        ut
+                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
+                        culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+                        minim
+                        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
+                        aute
+                        irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim
+                        id
+                        est laborum.</p>
+                </div>
+
+
+                <h6 class="mb-2 bg-warning text-center p-1">Analysing Gender Distribution by Age </h6>
+
+                <div class="row p-2">
+
+                    <!-- FOR HEAT MAP -->
+                    <div class="col-6 heatmap-container">
+                        <div id="heatmap"></div>
+                    </div>
+                    <div class="col-6">
+                        <div class="row">
+
+                            <h4>Analysis</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
+                                ut labore
+                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                                laboris nisi ut
+                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
+                                velit esse
+                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                                sunt in
+                                culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet,
+                                consectetur
+                                adipiscing elit, sed do eiusmod temp</p>
+                        </div>
+                        <div class="row">
+                            <p class="bg-primary">for future interactive chart</p>
+
+                            <!-- for future interactive graph -->
+                        </div>
+                    </div>
+
+                </div>
+
+
             </div>
-            
-            <!-- For Analysis Text-->
+
+        </div>
+
+        <!-- PASSENGER SATISFACTION DIV -->
+        <div class="container card passenger-satisfaction mt-3">
+            <h2>Passenger Satisfaction</h2>
+
+
             <div class="row">
-                <h5>Analysis</h5>
+                <h4>Analysis</h4>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                     aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
@@ -246,179 +309,148 @@ Email:  kim.jongun.2020
                     est laborum.</p>
             </div>
 
-            
-            <h6 class="mb-2 bg-warning text-center p-1">Analysing Gender Distribution by Age </h6>
-
-            <div class="row p-2">
-
-                <!-- FOR HEAT MAP -->
-                <div class="col-6 heatmap-container">
-                    <div id="heatmap"></div>
-                </div>
-                <div class="col-6">
-                    <div class="row">
-
-                        <h5>Analysis</h5>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                        et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                        culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit, sed do eiusmod temp</p>
-                    </div>
-                    <div class="row">
-                        <p class="bg-primary">for future interactive chart</p>
-
-                        <!-- for future interactive graph -->
-                    </div>
-                </div>
-
-            </div>
-
-
-        </div>
-
-    </div>
-
-    <!-- PASSENGER SATISFACTION DIV -->
-    <div class="container card passenger-satisfaction mt-3">
-        <h2>Passenger Satisfaction</h2>
-
-
-        <p>This is a paragraph</p>
 
 
 
-
-        <div class='tableauPlaceholder' id='viz1698669550215' style='position: relative'><noscript><a href='#'><img
-                        alt='Passenger Satisfaction '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                <param name='embed_code_version' value='3' />
-                <param name='site_root' value='' />
-                <param name='name' value='PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction' />
-                <param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image'
-                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='en-US' />
-                <param name='filter' value='publish=yes' />
-            </object>
-        </div>
-
-
-
-    </div>
-
-    <div class="container airline-delay mt-3">
-        <h2>Airline Delay</h2>
-        <div class="row">
-            <div class="col-12">
-                <p>This is a paragraph</p>
-            </div>
-            <div class="mt-2 col-12 d-flex justify-content-center">
-                <div id="chart-container" class="text-center">
-                    <h3>Flight Delays by Continent</h3>
-                </div>
-            </div>
-        </div>
-
-        <div class="container justify-content-center">
-            <div class='tableauPlaceholder' id='viz1698841248199' style='position: relative'><noscript><a href='#'><img
-                            alt='Dashboard 1 '
-                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1_rss.png'
+            <div class='tableauPlaceholder' id='viz1698669550215' style='position: relative'><noscript><a href='#'><img
+                            alt='Passenger Satisfaction '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1_rss.png'
                             style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
                     <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
                     <param name='embed_code_version' value='3' />
                     <param name='site_root' value='' />
-                    <param name='name' value='Project_16988363476220&#47;Dashboard1' />
+                    <param name='name' value='PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction' />
                     <param name='tabs' value='no' />
                     <param name='toolbar' value='yes' />
                     <param name='static_image'
-                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1.png' />
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pa&#47;PassengerSatisfaction_16986690189030&#47;PassengerSatisfaction&#47;1.png' />
                     <param name='animate_transition' value='yes' />
                     <param name='display_static_image' value='yes' />
                     <param name='display_spinner' value='yes' />
                     <param name='display_overlay' value='yes' />
                     <param name='display_count' value='yes' />
                     <param name='language' value='en-US' />
+                    <param name='filter' value='publish=yes' />
                 </object>
             </div>
+
+
+
         </div>
 
-        <div class="row mt-2">
-            <div class="col-12 text-center">
-                <h3>Weather Delays by Month/Year</h3>
+        <div class="container card airline-delay mt-3">
+            <h2>Airline Delay</h2>
+            <div class="row">
+                <div class="col-12">
+                    <p>This is a paragraph</p>
+                </div>
+                <div class="mt-2 col-12 d-flex justify-content-center">
+                    <div id="chart-container" class="text-center">
+                        <h3>Flight Delays by Continent</h3>
+                    </div>
+                </div>
             </div>
-            <div class="col-12 d-flex justify-content-center">
-                <svg class="chart"></svg>
+
+            <div class="container justify-content-center">
+                <div class='tableauPlaceholder' id='viz1698841248199' style='position: relative'><noscript><a
+                            href='#'><img alt='Dashboard 1 '
+                                src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1_rss.png'
+                                style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='Project_16988363476220&#47;Dashboard1' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image'
+                            value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Pr&#47;Project_16988363476220&#47;Dashboard1&#47;1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                    </object>
+                </div>
             </div>
-            <div class="col-12">
-                <p>This is a paragraph</p>
+
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    <h3>Weather Delays by Month/Year</h3>
+                </div>
+                <div class="col-12 d-flex justify-content-center">
+                    <svg class="chart"></svg>
+                </div>
+                <div class="col-12">
+                    <p>This is a paragraph</p>
+                </div>
             </div>
+
         </div>
 
-    </div>
-
-    <div class="container airline-review mt-3">
-        <h2>Airline Review</h2>
-        <p>This is a paragraph</p>
-        <div class='tableauPlaceholder' id='viz1698842502636' style='position: relative'><noscript><a href='#'><img
-                        alt='Airline Dashboard '
-                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1_rss.png'
-                        style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                <param name='embed_code_version' value='3' />
-                <param name='site_root' value='' />
-                <param name='name' value='Airline_review_16988422680820&#47;AirlineDashboard' />
-                <param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image'
-                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1.png' />
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='en-US' />
-            </object></div>
+        <div class="container card airline-review mt-3">
+            <h2>Airline Review</h2>
+            <p>This is a paragraph</p>
+            <div class='tableauPlaceholder' id='viz1698842502636' style='position: relative'><noscript><a href='#'><img
+                            alt='Airline Dashboard '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='Airline_review_16988422680820&#47;AirlineDashboard' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-US' />
+                </object></div>
 
 
-    </div>
+        </div>
 
-    <div class="container card mt-3">
-        <h1 class="text-start fw-bold">Conclusion</h1>
-        <p>
-            Based on our observation on the visualizations, our team identified the following potential opportunities
-            for the aviation industry to improve their offerings and optimize future investment on services that has the
-            greater impact on travellers’ experience and satisfaction.
-        </p>
-        <p>
-            Increase effort on maintenance and offerings for economy class flights during June and July period. We
-            observed that during this period every year, there is a substantial increase in the number of economy class
-            flights being sold by the airlines. From another visualization on travellers’ satisfaction, the team noted
-            that travellers are least satisfied on short and medium haul economy class flights. With more travellers
-            during the June and July period, if airlines improve their economy class offerings and quality during these
-            periods, they can greatly improve a large number of travellers’ experience and vastly improve their overall
-            ratings.
-        </p>
-        <p>
-            Create family packages for flights to popular destinations during the June to July period. We observed that
-            during these periods, in addition to the increase in the number of economy class flights, the visualizations
-            also indicated a substantial increase in family travellers during this period. By offering dedicated family
-            packages, the airlines can simplify the booking process and also gain better control over standardizing
-            in-flight services and amenities. This approach minimizes the need for individualized requests, thus
-            enhancing efficiency and enabling airlines to provide a consistent, high-quality travel experience for the
-            families.
+        <div class="container card mt-3">
+            <h1 class="text-start fw-bold">Conclusion</h1>
+            <p>
+                Based on our observation on the visualizations, our team identified the following potential
+                opportunities
+                for the aviation industry to improve their offerings and optimize future investment on services that has
+                the
+                greater impact on travellers’ experience and satisfaction.
+            </p>
+            <p>
+                Increase effort on maintenance and offerings for economy class flights during June and July period. We
+                observed that during this period every year, there is a substantial increase in the number of economy
+                class
+                flights being sold by the airlines. From another visualization on travellers’ satisfaction, the team
+                noted
+                that travellers are least satisfied on short and medium haul economy class flights. With more travellers
+                during the June and July period, if airlines improve their economy class offerings and quality during
+                these
+                periods, they can greatly improve a large number of travellers’ experience and vastly improve their
+                overall
+                ratings.
+            </p>
+            <p>
+                Create family packages for flights to popular destinations during the June to July period. We observed
+                that
+                during these periods, in addition to the increase in the number of economy class flights, the
+                visualizations
+                also indicated a substantial increase in family travellers during this period. By offering dedicated
+                family
+                packages, the airlines can simplify the booking process and also gain better control over standardizing
+                in-flight services and amenities. This approach minimizes the need for individualized requests, thus
+                enhancing efficiency and enabling airlines to provide a consistent, high-quality travel experience for
+                the
+                families.
 
-        </p>
-    </div>
+            </p>
+        </div>
 
 
     </div><!-- [Main App] end-container-->
