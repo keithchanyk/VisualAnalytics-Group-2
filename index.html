@@ -86,6 +86,8 @@ Email:  kim.jongun.2020
             <span class="letter letter-O"></span>
             <span class="letter letter-N"></span>
             <span class="letter letter-I"></span>
+            <span class="letter letter-Z"></span>
+            <span class="letter letter-I"></span>
             <span class="letter letter-N"></span>
             <span class="letter letter-G"></span>
             <span class="letter letter-blank"></span>
@@ -99,19 +101,22 @@ Email:  kim.jongun.2020
             <span class="letter letter-V"></span>
             <span class="letter letter-E"></span>
             <span class="letter letter-L"></span>
-
         </div>
-
         <div class="container mt-3 p-0">
-            <button @click="showDiv('divA')" class="btn btn-primary">Introduction</button>
-            <button @click="showDiv('divB')" class="btn btn-primary">Motivations</button>
-
+            <div class="row mb-2">
+                <div class="col-6">
+                    <button @click="showDiv('divA')" class="btn btn-secondary w-100 pt-2 pb-2">Introduction</button>
+                </div>
+                <div class="col-6">
+                    <button @click="showDiv('divB')" class="btn btn-secondary w-100 pt-2 pb-2">Motivations</button>
+                </div>
+            </div>
             <div v-if="currentDiv === 'divA'">
                 <div class="card">
+                     <h2 class="card-title text-center">Introduction</h2>
                     <div style="display: flex; justify-content: center; align-items: center; ">
                         <img src="./images/airport.png" class="card-img-top" alt="..." style="width: 40%;">
                     </div>
-
                     <div class="card-body">
                         <p class="card-text">Air travel has seen many transformations over the decades. From the rise of
                             in-flight entertainment, to heightened security measures from the effects of the 11
@@ -121,14 +126,14 @@ Email:  kim.jongun.2020
                             preference to flight experiences, with a much significant emphasis on health and safety. [1]
                             This paradigm shift not only underscores the adaptability of the aviation industry but also
                             raises questions about the future of travel in a world forever altered by the pandemic.</p>
-
                     </div>
                 </div>
             </div>
             <div v-if="currentDiv === 'divB'">
                 <div class="card">
+                    <h2 class="card-title text-center">Motivation</h2>
                     <div style="display: flex; justify-content: center; align-items: center; ">
-                        <img src="./images/airport.png" class="card-img-top" alt="..." style="width: 40%;">
+                        <img src="./images/airport-motivation.gif" class="card-img-top" alt="..." style="width: 60%;">
                     </div>
 
                     <div class="card-body">
@@ -147,8 +152,6 @@ Email:  kim.jongun.2020
                             travellers, it means making informed decisions that prioritize their safety, comfort, and
                             overall
                             satisfaction.
-
-
                         </p>
                         <p class="card-text">
                             This research seeks to address this critical intersection between passenger preferences and
@@ -160,12 +163,8 @@ Email:  kim.jongun.2020
                         </p>
                     </div>
                 </div>
-
             </div>
-
         </div>
-
-
 
         <!-- PASSENGER DEMOGRAPHIC DIV -->
         <div class="container card passenger-demographic p-3 mt-3">
@@ -201,9 +200,7 @@ Email:  kim.jongun.2020
                                     <option value="80+">80+</option>
                                 </select>
                             </div>
-
                             <div id="chart_one"></div>
-
                         </div>
 
                         <!-- SECOND PIE CHART -->
@@ -250,8 +247,7 @@ Email:  kim.jongun.2020
                         id
                         est laborum.</p>
                 </div>
-            </div>
-            <div class="row">
+
 
                 <h6 class="mb-2 bg-warning text-center p-1">Analysing Gender Distribution by Age </h6>
 
@@ -283,58 +279,8 @@ Email:  kim.jongun.2020
                             <!-- for future interactive graph -->
                         </div>
                     </div>
-
                 </div>
 
-            </div>
-            <div class="row">
-
-                <h6 class="mb-2 bg-warning text-center p-1">Analysing Gender Distribution by Age </h6>
-                <div class="row p-2">
-                
-                    <div class="col-8">
-                        <div class='tableauPlaceholder' id='viz1699280142963' style='position: relative'><noscript><a
-                                    href='#'><img alt='Dashboard 1 '
-                                        src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Tr&#47;TravelTrendDashboard&#47;Dashboard1&#47;1_rss.png'
-                                        style='border: none' /></a></noscript><object class='tableauViz'
-                                style='display:none;'>
-                                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                                <param name='embed_code_version' value='3' />
-                                <param name='site_root' value='' />
-                                <param name='name' value='TravelTrendDashboard&#47;Dashboard1' />
-                                <param name='tabs' value='no' />
-                                <param name='toolbar' value='yes' />
-                                <param name='static_image'
-                                    value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Tr&#47;TravelTrendDashboard&#47;Dashboard1&#47;1.png' />
-                                <param name='animate_transition' value='yes' />
-                                <param name='display_static_image' value='yes' />
-                                <param name='display_spinner' value='yes' />
-                                <param name='display_overlay' value='yes' />
-                                <param name='display_count' value='yes' />
-                                <param name='language' value='en-GB' />
-                                <param name='filter' value='publish=yes' />
-                            </object></div>
-                        <script
-                            type='text/javascript'>                    var divElement = document.getElementById('viz1699280142963'); var vizElement = divElement.getElementsByTagName('object')[0]; if (divElement.offsetWidth > 800) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else if (divElement.offsetWidth > 500) { vizElement.style.width = '100%'; vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px'; } else { vizElement.style.width = '100%'; vizElement.style.height = '727px'; } var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
-                    </div>
-                    <div class="col-4">
-                        <div class="row">
-
-                            <h4>Analysis</h4>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                                ut labore
-                                et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                                laboris nisi ut
-                                aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                                velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-                                sunt in
-                                culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet,
-                                consectetur
-                                adipiscing elit, sed do eiusmod temp</p>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
@@ -345,20 +291,22 @@ Email:  kim.jongun.2020
             <h2>Passenger Satisfaction</h2>
             <div class="row">
                 <h4>Analysis</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
-                    et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                    aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                    cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                    culpa qui officia deserunt mollit anim id est laborum.Lorem ipsum dolor sit amet, consectetur
-                    adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-                    veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-                    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-                    est laborum.</p>
+                <p>An interactive dashboard is used to summarise the findings of passengers’ satisfaction when flying. A
+                    pie chart matrix showing passengers’ satisfactory level against flight distance category and seat
+                    class was used to depict the satisfactory level of passengers in the various groups. This will help
+                    viewer to conduct targeted analysis and improvement to airline service based on passengers’ segment.
+                </p>
+                <p>Additionally, airlines may also choose to make improvements to satisfactory level of passengers
+                    based on their age group. This equally important as the needs and wants may differ from different
+                    age group.
+                </p>
+                <p>All these come in support with the histogram of Pre-Flight and On-Board services, to identify broad
+                    areas where airlines can improve their services in to meet customers’ demands.
+                </p>
+                <p>All these charts are interactive and work hand-in-hand with each other, to provide viewers a
+                    drilled-down and targeted approach in areas for improvement.
+                </p>
             </div>
-
-
-
 
             <div class='tableauPlaceholder' id='viz1698669550215' style='position: relative'><noscript><a href='#'><img
                             alt='Passenger Satisfaction '
@@ -381,11 +329,7 @@ Email:  kim.jongun.2020
                     <param name='filter' value='publish=yes' />
                 </object>
             </div>
-
-
-
         </div>
-
 
         <div class="container card airline-delay mt-3">
             <h2>Airline Delay</h2>
@@ -465,84 +409,85 @@ Email:  kim.jongun.2020
                         to keep the number of delays, due to weather, at largely within the same range of one another,
                         suggesting that they could have better planning compared to the carriers with constant large
                         number of delays, or are located in locations with generally favourable weather conditions. </p>
-                    <h3>Weather Delays by Month/Year</h3>
-                    <svg class="chart" style="max-width: 100%;"></svg>
+                    <h6 class="mb-2 bg-warning text-center p-1">Weather Delays by Month/Year</h6>
+
+                    <div class="text-center">
+                        <svg class="chart" style="max-width: 100%;"></svg>
+                    </div>
                 </div>
-
             </div>
+        </div>
+
+        <div class="container card airline-review mt-3">
+            <h2>Airline Review</h2>
+            <p>This is a paragraph</p>
+            <div class='tableauPlaceholder' id='viz1698842502636' style='position: relative'><noscript><a href='#'><img
+                            alt='Airline Dashboard '
+                            src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1_rss.png'
+                            style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                    <param name='embed_code_version' value='3' />
+                    <param name='site_root' value='' />
+                    <param name='name' value='Airline_review_16988422680820&#47;AirlineDashboard' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image'
+                        value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1.png' />
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-US' />
+                </object></div>
 
 
-            <div class="container airline-review">
-                <h2>Airline Review</h2>
-                <p>This is a paragraph</p>
-                <div class='tableauPlaceholder' id='viz1698842502636' style='position: relative'><noscript><a
-                            href='#'><img alt='Airline Dashboard '
-                                src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1_rss.png'
-                                style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
-                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
-                        <param name='embed_code_version' value='3' />
-                        <param name='site_root' value='' />
-                        <param name='name' value='Airline_review_16988422680820&#47;AirlineDashboard' />
-                        <param name='tabs' value='no' />
-                        <param name='toolbar' value='yes' />
-                        <param name='static_image'
-                            value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;Ai&#47;Airline_review_16988422680820&#47;AirlineDashboard&#47;1.png' />
-                        <param name='animate_transition' value='yes' />
-                        <param name='display_static_image' value='yes' />
-                        <param name='display_spinner' value='yes' />
-                        <param name='display_overlay' value='yes' />
-                        <param name='display_count' value='yes' />
-                        <param name='language' value='en-US' />
-                    </object></div>
+        </div>
 
+        <div class="container card mt-3">
+            <h1 class="text-start fw-bold">Conclusion</h1>
+            <p>
+                Based on our observation on the visualizations, our team identified the following potential
+                opportunities
+                for the aviation industry to improve their offerings and optimize future investment on services that
+                has
+                the
+                greater impact on travellers’ experience and satisfaction.
+            </p>
+            <p>
+                Increase effort on maintenance and offerings for economy class flights during June and July period.
+                We
+                observed that during this period every year, there is a substantial increase in the number of
+                economy
+                class
+                flights being sold by the airlines. From another visualization on travellers’ satisfaction, the team
+                noted
+                that travellers are least satisfied on short and medium haul economy class flights. With more
+                travellers
+                during the June and July period, if airlines improve their economy class offerings and quality
+                during
+                these
+                periods, they can greatly improve a large number of travellers’ experience and vastly improve their
+                overall
+                ratings.
+            </p>
+            <p>
+                Create family packages for flights to popular destinations during the June to July period. We
+                observed
+                that
+                during these periods, in addition to the increase in the number of economy class flights, the
+                visualizations
+                also indicated a substantial increase in family travellers during this period. By offering dedicated
+                family
+                packages, the airlines can simplify the booking process and also gain better control over
+                standardizing
+                in-flight services and amenities. This approach minimizes the need for individualized requests, thus
+                enhancing efficiency and enabling airlines to provide a consistent, high-quality travel experience
+                for
+                the
+                families.
 
-            </div>
-
-            <div class="container card mt-3">
-                <h1 class="text-start fw-bold">Conclusion</h1>
-                <p>
-                    Based on our observation on the visualizations, our team identified the following potential
-                    opportunities
-                    for the aviation industry to improve their offerings and optimize future investment on services that
-                    has
-                    the
-                    greater impact on travellers’ experience and satisfaction.
-                </p>
-                <p>
-                    Increase effort on maintenance and offerings for economy class flights during June and July period.
-                    We
-                    observed that during this period every year, there is a substantial increase in the number of
-                    economy
-                    class
-                    flights being sold by the airlines. From another visualization on travellers’ satisfaction, the team
-                    noted
-                    that travellers are least satisfied on short and medium haul economy class flights. With more
-                    travellers
-                    during the June and July period, if airlines improve their economy class offerings and quality
-                    during
-                    these
-                    periods, they can greatly improve a large number of travellers’ experience and vastly improve their
-                    overall
-                    ratings.
-                </p>
-                <p>
-                    Create family packages for flights to popular destinations during the June to July period. We
-                    observed
-                    that
-                    during these periods, in addition to the increase in the number of economy class flights, the
-                    visualizations
-                    also indicated a substantial increase in family travellers during this period. By offering dedicated
-                    family
-                    packages, the airlines can simplify the booking process and also gain better control over
-                    standardizing
-                    in-flight services and amenities. This approach minimizes the need for individualized requests, thus
-                    enhancing efficiency and enabling airlines to provide a consistent, high-quality travel experience
-                    for
-                    the
-                    families.
-
-                </p>
-            </div>
+            </p>
         </div>
 
     </div><!-- [Main App] end-container-->
@@ -557,8 +502,6 @@ Email:  kim.jongun.2020
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-
-
     <!-- DO NOT REMOVE
          REFERENCE TO LOCAL EXTERNAL JAVASCRIPT
      -->
@@ -567,8 +510,6 @@ Email:  kim.jongun.2020
     <script src="classByAge.js"></script>
     <script src="flightStatusByContinent.js"></script>
     <script src="gender_by_age.js"></script>
-
-
 
 </body>
 

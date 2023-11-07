@@ -24,7 +24,6 @@ a {
 .departure-board {
   display: flex;
   justify-content: center;
-  border: 2px solid red;
 }
 
 .letter {
