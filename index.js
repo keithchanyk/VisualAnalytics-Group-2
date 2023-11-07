@@ -75,8 +75,9 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);
 var CSV_FILE_PATH = "./datasets/airline_delay_cause.csv";
 
 // Set the dimensions of the chart
-var canvasWidth = 1000;
-var canvasHeight = 500;
+var chartContainer = document.querySelector('.chart');
+var canvasWidth = chartContainer.clientWidth;
+var canvasHeight = canvasWidth * 0.5;
 
 // scales
 var x, y, size;
