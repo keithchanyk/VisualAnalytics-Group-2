@@ -190,7 +190,7 @@ function makeWeatherBubbleChart(data) {
     // Add y-axis title
     canvas.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 20)
+        .attr("y", 0)
         .attr("x", 0 - (canvasHeight / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
