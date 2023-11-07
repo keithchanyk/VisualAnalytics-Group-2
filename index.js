@@ -203,7 +203,7 @@ function makeWeatherBubbleChart(data) {
         .attr("x", canvasWidth / 2)
         .attr("dy", "1em")
         .style("text-anchor", "middle")
-        .text("Month/Year");
+        .text("Year");
 
     // Add legend
     var legend_title = "Number of delays"
