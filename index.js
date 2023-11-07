@@ -75,8 +75,9 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);
 var CSV_FILE_PATH = "./datasets/airline_delay_cause.csv";
 
 // Set the dimensions of the chart
-var canvasWidth = 1000;
-var canvasHeight = 500;
+var chartContainer = document.querySelector('.chart');
+var canvasWidth = chartContainer.clientWidth;
+var canvasHeight = canvasWidth * 0.5;
 
 // scales
 var x, y, size;
@@ -190,7 +191,7 @@ function makeWeatherBubbleChart(data) {
     // Add y-axis title
     canvas.append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 20)
+        .attr("y", 0)
         .attr("x", 0 - (canvasHeight / 2))
         .attr("dy", "1em")
         .style("text-anchor", "middle")
