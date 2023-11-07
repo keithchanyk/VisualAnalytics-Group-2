@@ -40,16 +40,23 @@
      const num_row = passengerCounts.length;
      var chartContainer = document.querySelector('.heatmap-container');
      var containerWidth = chartContainer.clientWidth; // Get the width of the container
-     var containerHeight = containerWidth * 0.5; // Maintain a 4:3 aspect ratio
+     var containerHeight = containerWidth / 9 * (num_row/2 + 2); // Maintain a 4:3 aspect ratio
 
      // Set up dimensions and colors
 
      var margin = { top: 20, right: 30, bottom: 60, left: 90 };
 
-     cellSize = containerHeight / num_row
-     cellWidth = cellSize * 3
+    cellWidth = containerWidth / 3 
+    //  cellWidth = cellHeight * 3
+
+    cellHeight = cellWidth / 3 
+
+
+     console.log(containerWidth)
+     console.log(cellWidth)
+    //  cellHeight = cellWidth / 3
      gap = cellWidth / 20
-     const fontSize = containerWidth / 100; 
+     const fontSize = containerWidth / 55; 
 
      const colorScale = d3.scaleSequential(d3.interpolateYlOrRd)
          .domain([d3.min(passengerCounts), d3.max(passengerCounts)]);
@@ -59,7 +66,7 @@
          .append("svg")
          .attr("width", containerWidth)
          .attr("height", containerHeight)
-         .attr("transform", "translate(" + margin.left + "," + margin.top + ")");;
+         .attr("transform", "translate(" + 0 + "," + margin.top + ")");;
 
 
      // Create the heatmap
@@ -68,9 +75,9 @@
          .enter()
          .append("rect")
          .attr("x", (d, i) => i % genders.length * (cellWidth + gap) + margin.left)
-         .attr("y", (d, i) => Math.floor(i / genders.length) * (cellSize + gap) + margin.top)
+         .attr("y", (d, i) => Math.floor(i / genders.length) * (cellHeight + gap) + margin.top)
          .attr("width", cellWidth)
-         .attr("height", cellSize)
+         .attr("height", cellHeight)
          .style("fill", d => colorScale(d))
          .append("title") // Add a title element
          .text(d => 'Count: ' + d);
@@ -82,8 +89,8 @@
          .enter()
          .append("text")
          .text(d => ('Age ' +  d) )
-         .attr("x", margin.left - gap * 3)  // Adjust the x-coordinate to move it to the left
-         .attr("y", (d, i) => i * (cellSize + gap) + margin.top + cellSize / 2)  // Center the label vertically
+         .attr("x", margin.left - gap * 2)  // Adjust the x-coordinate to move it to the left
+         .attr("y", (d, i) => i * (cellHeight + gap) + margin.top + cellHeight / 2)  // Center the label vertically
          .style("text-anchor", "end")  // Align text to the right
          .style("font-size", fontSize + "px")
          .attr("class", "xLabel");

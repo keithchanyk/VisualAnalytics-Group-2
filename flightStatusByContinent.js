@@ -1,0 +1,198 @@
+
+        // d3.csv("Airline Dataset Updated - v2.csv").then(function (data) {
+            d3.csv("datasets/Airline Dataset Updated - v2.csv").then(function (data) {
+                console.log("Loaded data:", data);
+    
+                // Group data by continent and flight status
+                const nestedData = d3.group(data, d => d.Continents, d => d['Flight Status']);
+                console.log("Nested data:", nestedData);
+    
+                // Get unique flight status values
+                const flightStatusValues = Array.from(new Set(data.map(d => d['Flight Status'])));
+                console.log("Flight status values:", flightStatusValues);
+    
+                // Convert InternMap to Map for easier handling
+                const nestedMap = new Map(nestedData);
+    
+                // Create a data structure for counting flight status occurrences in each continent
+                const countData = Array.from(nestedMap, ([continent, values]) => {
+                    const countObj = { continent: continent };
+                    flightStatusValues.forEach(status => {
+                        countObj[status] = values.get(status)?.length || 0;
+                    });
+                    return countObj;
+                });
+    
+                // Create a stack for each flight status
+                const stack = d3.stack()
+                    .keys(flightStatusValues)
+                    .value((d, key) => d[key] || 0);
+    
+                // Create stacked data
+                const stackedData = stack(countData);
+                console.log("Stacked data:", stackedData);
+    
+    
+                var margin = { top: 50, right: 50, bottom: 50, left: 50 },
+                    width = 600 - margin.left - margin.right,
+                    height = 500 - margin.top - margin.bottom;
+    
+                // append the svg object to the body of the page
+                var svg = d3.select("#chart-container")
+                    .append("svg")
+                    .attr("width", width + margin.left + margin.right)
+                    .attr("height", height + margin.top + margin.bottom)
+                    .append("g")
+                    .attr("transform",
+                        "translate(" + (width / 2 + 50) + "," + (height / 2 + 50) + ")");
+
+                // Create scales
+                var innerRadius = 50;
+                var outerRadius = Math.min(width, height) / 1.9 - 7;  // Adjust this value to make the plot bigger
+    
+                var x = d3.scaleBand()
+                    .domain(countData.map(d => d.continent))
+                    .range([0, 2 * Math.PI])
+                    .padding([0.2]);
+    
+                var y = d3.scaleRadial()
+                    .domain([0, d3.max(stackedData, d => d3.max(d, v => v[1]))])
+                    .range([innerRadius, outerRadius]);
+    
+                var color = d3.scaleOrdinal()
+                    .domain(flightStatusValues)
+                    .range(['#18375F', '#0072BC', '#8EBEFF']);
+    
+                // Add bars
+                svg.append("g")
+                    .selectAll("g")
+                    // Enter in the stack data = loop key per key = group per group
+                    .data(stackedData)
+                    .enter().append("g")
+                    .attr("fill", function (d) {
+                        return color(d.key);
+                    })
+                    .selectAll("path")
+                    // Enter a second time = loop subgroup per subgroup to add all rectangles
+                    .data(function (d) {
+                        return d;
+                    })
+                    .enter().append("path")
+                    .attr("d", d3.arc()
+                        .innerRadius(d => y(d[0]))
+                        .outerRadius(d => y(d[1]))
+                        .startAngle(d => x(d.data.continent))
+                        .endAngle(d => x(d.data.continent) + x.bandwidth())
+                        .padAngle(0.01)
+                        .padRadius(innerRadius))
+                    .attr("stroke", "grey")
+                    .on("mouseover", mouseover)
+                    .on("mousemove", mousemove)
+                    .on("mouseleave", mouseleave);
+    
+                // Add labels for continents
+                svg.append("g")
+                .selectAll("text")
+                .data(countData)
+                .enter()
+                .append("text")
+                .attr("transform", function (d) {
+                    var angle = (x(d.continent) + x.bandwidth() / 2 - Math.PI / 2);
+                    var radius = outerRadius + 18; // Adjust this value to make the labels further from the center
+                    var xPosition = Math.cos(angle) * radius;
+                    var yPosition = Math.sin(angle) * radius;
+                    return "translate(" + xPosition + "," + yPosition + ")";
+                })
+                .attr("text-anchor", function (d) {
+                    return (x(d.continent) + x.bandwidth() / 2 + Math.PI / 2) % (2 * Math.PI) < Math.PI ? "start" : "end";
+                })
+                .text(d => d.continent);
+    
+    
+                // Add legend title
+                svg.append("text")
+                    .attr("x",-220)
+                    .attr("y", -height / 2 + 350)
+                    .attr("dy", ".35em")
+                    .style("text-anchor", "middle")
+                    .style("font-weight", "bold")
+                    .text("Flight Status");
+    
+                // Add legend
+                const legend = svg
+                    .selectAll("legend")
+                    .data(flightStatusValues)
+                    .enter()
+                    .append("g")
+                    .attr("class", "legend")
+                    .attr("transform", (d, i) => {
+                        const legendHeight = flightStatusValues.length * 20;
+                        const offset = height / 2 - legendHeight / 2;
+                        return "translate(-25," + (i * 20 + offset) + ")"; // Adjust the x-offset as needed
+                    });
+    
+    
+                // Add colored rectangles to legend
+                legend
+                    .append("rect")
+                    .attr("x", -width / 2 + 10)
+                    .attr("width", 18)
+                    .attr("height", 18)
+                    .style("fill", d => color(d));
+    
+                // Add text to legend
+                legend
+                    .append("text")
+                    .attr("x", -width / 2 + 30)
+                    .attr("y", 9)
+                    .attr("dy", ".35em")
+                    .style("text-anchor", "start")
+                    .text(d => d);
+    
+                });
+    
+            var tooltip = d3.select("#chart-container")
+                .append("div")
+                .style("opacity", 0)
+                .attr("class", "tooltip")
+                .style("background-color", "white")
+                .style("border", "solid")
+                .style("border-width", "1px")
+                .style("border-radius", "5px")
+                .style("padding", "10px")
+                .style("position", "absolute")
+                .style("width", "200px");
+    
+            var mouseover = function (event, d) {
+                if (!d.data || !d.data[d3.select(this.parentNode).datum().key]) {
+                    return;
+                }
+    
+                var subgroupName = d3.select(this.parentNode).datum().key;
+                var subgroupValue = d.data[subgroupName];
+                var continent = d.data.continent;
+    
+                tooltip
+                    .html("Continent: " + continent + "<br>" +
+                        "Flight Status: " + subgroupName + "<br>" +
+                        "Count: " + subgroupValue)
+                    .style("opacity", 1);
+    
+                d3.select(this)
+                    .style("opacity", 0.5);
+            };
+    
+            var mousemove = function (d) {
+                var [x, y] = d3.pointer(d, d3.select("#chart-container").node());
+    
+                tooltip
+                    .style("transform", `translate(${x + 10}px, ${y - 10}px)`);
+            };
+    
+            var mouseleave = function (d) {
+                tooltip
+                    .style("opacity", 0);
+                d3.select(this)
+                    .style("opacity", 1);
+            };
+    
