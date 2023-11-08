@@ -80,8 +80,8 @@ function updatePieChartOne(ageBin) {
         // Get the container (div) and its dimensions
         const container = d3.select('#piechartone');
         const containerWidth = container.node().getBoundingClientRect().width;
-        const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
-        const fontSize = containerWidth / 40;
+        const containerHeight = containerWidth; // Maintain a 4:3 aspect ratio
+        const fontSize = containerWidth / 25;
 
         // Create the SVG element
         const svg = d3.select('#chart_one')
@@ -244,8 +244,8 @@ function updatePieChartTwo(ageBin) {
         // Get the container (div) and its dimensions
         const container = d3.select('#piecharttwo');
         const containerWidth = container.node().getBoundingClientRect().width;
-        const containerHeight = containerWidth * 0.75; // Maintain a 4:3 aspect ratio
-        const fontSize = containerWidth / 40;
+        const containerHeight = containerWidth; // Maintain a 4:3 aspect ratio
+        const fontSize = containerWidth / 25;
 
 
 
